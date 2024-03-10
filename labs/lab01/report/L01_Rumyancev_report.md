@@ -1,32 +1,73 @@
 ---
 ## Front matter
-lang: ru-RU
-title: Лабораторная работа №4
-subtitle: Операционные системы
-author:
-  - Румянцев Артём Олегович
-institute:
-  - Российский университет дружбы народов, Москва, Россия
-date: 2 марта 2023
+title: "Лабораторная работа №1"
+subtitle: "Архитектура компьютера и операционные системы"
+author: "Румянцев Артём Олегович"
 
-## i18n babel
+## Generic otions
+lang: ru-RU
+toc-title: "Содержание"
+
+## Bibliography
+bibliography: bib/cite.bib
+csl: pandoc/csl/gost-r-7-0-5-2008-numeric.csl
+
+## Pdf output format
+toc: true # Table of contents
+toc-depth: 2
+lof: true # List of figures
+lot: true # List of tables
+fontsize: 12pt
+linestretch: 1.5
+papersize: a4
+documentclass: scrreprt
+## I18n polyglossia
+polyglossia-lang:
+  name: russian
+  options:
+	- spelling=modern
+	- babelshorthands=true
+polyglossia-otherlangs:
+  name: english
+## I18n babel
 babel-lang: russian
 babel-otherlangs: english
-
-## Formatting pdf
-toc: false
-toc-title: Содержание
-slide_level: 2
-aspectratio: 169
-section-titles: true
-theme: metropolis
+## Fonts
+mainfont: PT Serif
+romanfont: PT Serif
+sansfont: PT Sans
+monofont: PT Mono
+mainfontoptions: Ligatures=TeX
+romanfontoptions: Ligatures=TeX
+sansfontoptions: Ligatures=TeX,Scale=MatchLowercase
+monofontoptions: Scale=MatchLowercase,Scale=0.9
+## Biblatex
+biblatex: true
+biblio-style: "gost-numeric"
+biblatexoptions:
+  - parentracker=true
+  - backend=biber
+  - hyperref=auto
+  - language=auto
+  - autolang=other*
+  - citestyle=gost-numeric
+## Pandoc-crossref LaTeX customization
+figureTitle: "Рис."
+tableTitle: "Таблица"
+listingTitle: "Листинг"
+lofTitle: "Список иллюстраций"
+lotTitle: "Список таблиц"
+lolTitle: "Листинги"
+## Misc options
+indent: true
 header-includes:
- - \metroset{progressbar=frametitle,sectionpage=progressbar,numbering=fraction}
- - '\makeatletter'
- - '\beamer@ignorenonframefalse'
- - '\makeatother'
+  - \PassOptionsToPackage{english,russian}{babel}
+  - \usepackage[english,russian]{babel}
+  - \usepackage[utf8]{inputenc}
+  - \usepackage{indentfirst}
+  - \usepackage{float} # keep figures where there are in the text
+  - \floatplacement{figure}{H} # keep figures where there are in the text
 ---
-
 # Цель работы
 
 Целью данной работы является приобретение практических навыков установки операционной системы на виртуальную машину, 
@@ -358,3 +399,100 @@ mc в качестве файлового менеджера в терминал
 При выполнении данной лабораторной работы, я приобрел практические навыки установки операционной системы на виртуальную машину,
 а так же сделал настройки минимально необходимых для дальнейшей работы сервисов.
 
+# Ответы на контрольные вопросы 
+
+1.Учетная запись содержит необходимые для идентификации пользователя при подключении к системе данные, 
+а так же информацию для авторизации и учета: системного имени (user name) (оно может содержать только латинские буквы и знак нижнее подчеркивание, еще оно должно быть уникальным), 
+идентификатор пользователя (UID) (уникальный идентификатор пользователя в системе, 
+целое положительное число), идентификатор группы (CID) (группа, к к-рой относится пользователь. Она, как минимум, одна, по умолчанию - одна), 
+полное имя (full name) (Могут быть ФИО), 
+домашний каталог (home directory) (каталог, в к-рый попадает пользователь после входа в систему и в к-ром хранятся его данные),
+ начальная оболочка (login shell) (командная оболочка, к-рая запускается при входе в систему).
+
+2.Для получения справки по команде: <команда> --help; для перемещения по файловой системе - cd; для просмотра содержимого каталога - ls;
+ для определения объёма каталога - du <имя каталога>; для создания / удаления каталогов - mkdir/rmdir; для создания / удаления файлов - touch/rm; 
+для задания определённых прав на файл / каталог - chmod; для просмотра истории команд - history
+
+3.Файловая система - это порядок, определяющий способ организации и хранения и именования данных на различных носителях информации. 
+Примеры: FAT32 представляет собой пространство, разделенное на три части: олна область для служебных структур, 
+форма указателей в виде таблиц и зона для хранения самих файлов. ext3/ext4 - журналируемая файловая система, используемая в основном в ОС с ядром Linux.
+
+4.С помощью команды df, введя ее в терминале. Это утилита, которая показывает список всех файловых систем по именам устройств,
+ сообщает их размер и данные о памяти. Также посмотреть подмонтированные файловые системы можно с помощью утилиты mount.
+
+5.Чтобы удалить зависший процесс, вначале мы должны узнать, какой у него id: используем команду ps. Далее в терминале вводим команду kill < id процесса >. 
+Или можно использовать утилиту killall, что "убьет" все процессы, которые есть в данный момент, для этого не нужно знать id процесса.
+
+## Выполнение домашнего задания
+Ввожу в терминале команду dmesg, чтобы проанализировать последовательность загрузки системы (рис. 36 ).
+
+
+
+![Рис 36](image/38.png){#fig:001 width=70%}
+
+
+
+С помощью поиска, осуществляемого командой 'dmesg | grep -i <что ищем>', ищу версию ядра Linux: 6.1.10-200.fc37.x86_64 (рис. 37]).
+
+
+
+![Рис 37](image/39.png){#fig:001 width=70%}
+
+
+
+К сожалению, если вводить "Detected Mhz processor" там, где нужно указывать, что я ищу, то мне ничего не выведется. Это происходит потому, что запрос не предусматривает дополнительные символы внутри него (я проверяла, будет ли работать он с маской - не будет). В таком случае я оставила одно из ключевых слов (могла оставить два: "Mhz processor") и получила результат: 1992 Mhz (рис. 38 ).
+
+
+
+![Рис 38](image/40.png){#fig:001 width=70%}
+
+
+
+Аналогично ищу модель процессора (рис. 39 ).
+
+
+
+![Рис 39 ](image/41.png){#fig:001 width=70%}
+
+
+
+Объем доступной оперативной памяти ищу аналогично поиску частоты процессора, т. к. возникла та же проблема, что и там рис. 40 ).
+
+
+
+
+![Рис 40 ](image/42.png){#fig:001 width=70%}
+
+
+
+Нахожу тип обнаруженного гипервизора (рис. 41 ).
+
+
+
+![Рис 41](image/43.png){#fig:001 width=70%}
+
+
+
+
+Тип файловой системы корневого раздела можно посмотреть с помощью утилиты fdisk (рис. 42 ).
+
+
+
+
+![Рис 42](image/44.png){#fig:001 width=70%}
+
+
+
+
+
+# Список литературы{.unnumbered}
+
+::: {#refs}
+:::
+1.Dash P. Getting started with oracle vm virtualbox. Packt Publishing Ltd, 2013. 
+2.Colvin H. Virtualbox: An ultimate guide book on virtualization with virtualbox. CreateSpace Independent Publishing Platform, 2015. .
+van Vugt S. Red hat rhcsa/rhce 7 cert guide : Red hat enterprise linux 7 (ex200 and ex300). Pearson IT Certification, 2016. 
+3.Робачевский А., Немнюгин С., Стесик О. Операционная система unix. 2-е изд. Санкт-Петербург: БХВ-Петербург, 2010. 
+4.Немет Э. et al. Unix и Linux: руководство системного администратора. 4-е изд. Вильямс, 2014. 
+5.Колисниченко Д.Н. Самоучитель системного администратора Linux. СПб.: БХВ-Петербург, 2011. 
+6.Robbins A. Bash pocket reference. O’Reilly Media, 2016. 
