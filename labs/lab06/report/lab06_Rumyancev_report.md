@@ -1,33 +1,73 @@
 ---
 ## Front matter
-lang: ru-RU
-title: Лабораторная работа №6
-subtitle: Операционные системы
-author:
-  - Румянцев Артём Олегович
-institute:
-  - Российский университет дружбы народов, Москва, Россия
-date: 16 марта 2023
+title: "Лабораторная работа №6"
+subtitle: "Операционные системы"
+author: "Румянцев Артём Олегович"
 
-## i18n babel
+## Generic otions
+lang: ru-RU
+toc-title: "Содержание"
+
+## Bibliography
+bibliography: bib/cite.bib
+csl: pandoc/csl/gost-r-7-0-5-2008-numeric.csl
+
+## Pdf output format
+toc: true # Table of contents
+toc-depth: 2
+lof: true # List of figures
+lot: true # List of tables
+fontsize: 12pt
+linestretch: 1.5
+papersize: a4
+documentclass: scrreprt
+## I18n polyglossia
+polyglossia-lang:
+  name: russian
+  options:
+	- spelling=modern
+	- babelshorthands=true
+polyglossia-otherlangs:
+  name: english
+## I18n babel
 babel-lang: russian
 babel-otherlangs: english
-
-## Formatting pdf
-toc: false
-toc-title: Содержание
-slide_level: 2
-aspectratio: 169
-section-titles: true
-theme: metropolis
+## Fonts
+mainfont: PT Serif
+romanfont: PT Serif
+sansfont: PT Sans
+monofont: PT Mono
+mainfontoptions: Ligatures=TeX
+romanfontoptions: Ligatures=TeX
+sansfontoptions: Ligatures=TeX,Scale=MatchLowercase
+monofontoptions: Scale=MatchLowercase,Scale=0.9
+## Biblatex
+biblatex: true
+biblio-style: "gost-numeric"
+biblatexoptions:
+  - parentracker=true
+  - backend=biber
+  - hyperref=auto
+  - language=auto
+  - autolang=other*
+  - citestyle=gost-numeric
+## Pandoc-crossref LaTeX customization
+figureTitle: "Рис."
+tableTitle: "Таблица"
+listingTitle: "Листинг"
+lofTitle: "Список иллюстраций"
+lotTitle: "Список таблиц"
+lolTitle: "Листинги"
+## Misc options
+indent: true
 header-includes:
- - \metroset{progressbar=frametitle,sectionpage=progressbar,numbering=fraction}
- - '\makeatletter'
- - '\beamer@ignorenonframefalse'
- - '\makeatother'
+  - \PassOptionsToPackage{english,russian}{babel}
+  - \usepackage[english,russian]{babel}
+  - \usepackage[utf8]{inputenc}
+  - \usepackage{indentfirst}
+  - \usepackage{float} # keep figures where there are in the text
+  - \floatplacement{figure}{H} # keep figures where there are in the text
 ---
-
-# Информация
 
 # Цель работы
 Приобретение практических навыков взаимодействия пользователя с системой по-
@@ -190,15 +230,15 @@ header-includes:
 С помощью man rm  узнаю описание команды rm и её опции(рис.20)
 
 
-1. -f - игнорировать несуществующие файлы или аргументы, никогда не выводить запрос на подтверждение удаления
-2. -i - выводить запрос на подтверждение удаления каждого файла
-3. -I - вывести запрос на подтверждение удаления один раз, для всех файлов, если удаляется больше 3-х файлов или идет рекурсивное удаление
-4. --interactive - заменяет предыдущие три опции, можно выбрать одну из них.
-5. --one-file-system - во время рекурсивного удаления пропускать директории из других файловых систем
-6. --no-preserve-root если в качестве директории задана корневая, то считать что это обычная директория и начать удаление.
-7. -r, -R - удаляет директории их содержимое рекурсивно
-8. -d, --dir - удаляет пустые директории
-9. -v - прописывает все действия команды
+1.-f - игнорировать несуществующие файлы или аргументы, никогда не выводить запрос на подтверждение удаления
+2.-i - выводить запрос на подтверждение удаления каждого файла
+3.-I - вывести запрос на подтверждение удаления один раз, для всех файлов, если удаляется больше 3-х файлов или идет рекурсивное удаление
+4.--interactive - заменяет предыдущие три опции, можно выбрать одну из них.
+5.--one-file-system - во время рекурсивного удаления пропускать директории из других файловых систем
+6.--no-preserve-root если в качестве директории задана корневая, то считать что это обычная директория и начать удаление.
+7.-r, -R - удаляет директории их содержимое рекурсивно
+8.-d, --dir - удаляет пустые директории
+9.-v - прописывает все действия команды
 
 
 ![](image/20.png){#fig:001 width=70%}
