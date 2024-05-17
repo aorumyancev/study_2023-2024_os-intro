@@ -122,4 +122,5 @@ header-includes:
 
 - https://ru.wikipedia.org/wiki/NuGet
 - https://www.nuget.org/
+- https://learn.microsoft.com/ru-ru/nuget/what-is-nuget
 
